@@ -6,7 +6,7 @@ const List1: React.FC = () => {
 
   return <ul>
     {listElementsInfo.map((_, index) => {
-      return <ListElement key={index} num={index+1} />;
+      return <ListElement key={index} num={index + 1} />;
     })}
   </ul>;
 };

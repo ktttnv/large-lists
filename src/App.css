@@ -1,3 +1,9 @@
 .App {
     padding: 20px;
 }
+
+.contents {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
