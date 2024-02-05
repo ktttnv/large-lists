@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetPostsQuery } from '../../../api';
 import './List4.css';
-import useListNavigation from './hooks/useListNavigation';
+import useLoadMoreNavigation from './hooks/useLoadMoreNavigation';
 
 type Post = {
   id: string;
@@ -10,24 +10,33 @@ type Post = {
 };
 
 const List4: React.FC = () => {
-  const { page, goToPage } = useListNavigation('/list4/');
-  const { data, error, isLoading } = useGetPostsQuery({ page, limit: 10 });
+  const { page, loadMore } = useLoadMoreNavigation();
+  const { data, error, isLoading, isFetching } = useGetPostsQuery({ page, limit: 10 });
+  const [posts, setPosts] = useState<Post[]>([]);
 
-  if (isLoading) return <div className='loading'>Loading...</div>;
+  useEffect(() => {
+    if (data) {
+      setPosts((prevPosts) => [...prevPosts, ...data]);
+    }
+  }, [data]);
+
+  const handleLoadMore = () => {
+    loadMore();
+  }
+
+  if (isLoading && page === 1) return <div className='loading'>Loading...</div>;
   if (error) return <div>Error: {error.toString()}</div>;
 
   return (
     <div className='List4'>
-      <div className="pagination">
-        <button onClick={() => goToPage(page > 2 ? page - 1 : 1)}>{"<"}</button>
-        <button onClick={() => goToPage(page + 1)}>{">"}</button>
-      </div>
-      {data && data.map((post: Post) => (
+      {posts.map((post: Post) => (
         <div className='post' key={post.id}>
           <h4>{post.title}</h4>
           <p>{post.body}</p>
         </div>
       ))}
+      {isFetching && <div className='loading'>Loading more...</div>}
+      <button onClick={handleLoadMore} disabled={isFetching}>Load More</button>
     </div>
   );
 };
