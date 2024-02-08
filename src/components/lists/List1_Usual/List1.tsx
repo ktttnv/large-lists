@@ -1,12 +1,16 @@
 import React from 'react';
-import ListElement from './ListItem';
+import List1Item from './List1Item';
 
-const List1: React.FC = () => {
-  const listElementsInfo = Array.from({ length: 100, });
+type List1Props = {
+  size: number;
+};
+
+const List1: React.FC<List1Props> = ({ size }) => {
+  const listItemsInfo = Array.from({ length: size });
 
   return <ul>
-    {listElementsInfo.map((_, index) => {
-      return <ListElement key={index} num={index + 1} />;
+    {listItemsInfo.map((_, index) => {
+      return <List1Item key={index} num={index + 1} />;
     })}
   </ul>;
 };

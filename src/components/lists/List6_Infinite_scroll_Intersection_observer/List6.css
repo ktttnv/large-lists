@@ -1,0 +1,43 @@
+.List6 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.List6 .post {
+    width: 100%;
+    max-width: 600px;
+    height: 150px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: rgba(0, 0, 0, 0.5) 1px solid;
+    overflow: hidden;
+    background-color: #eee;
+}
+
+.List6 h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.List6 p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.List6 .loading {
+    font-size: 20px;
+    color: #777;
+    margin: 20px 0;
+}
+
+.List6 .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
